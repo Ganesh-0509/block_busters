@@ -1,24 +1,21 @@
 import express from "express";
-import { getPrediction } from "../services/mlClient.js";
+import { getPrediction } from "../services/mlClient.js"; // calls deployed API
 
 const router = express.Router();
 
-// POST route for prediction
 router.post("/", async (req, res) => {
   const inputFeatures = req.body;
-
   try {
-    if (!inputFeatures || Object.keys(inputFeatures).length === 0) {
-      return res.status(400).json({ error: "Missing input features" });
-    }
-
     const prediction = await getPrediction(inputFeatures);
-    res.json(prediction);
-  } catch (error) {
-    console.error("Prediction failed:", error);
-    res.status(502).json({
+    res.json({
+      input_features: inputFeatures,
+      predicted_price: prediction.predicted_house_price,
+      message: prediction.message || "Price prediction successful"
+    });
+  } catch (err) {
+    res.status(500).json({
       error: "Prediction failed",
-      details: error?.message || "Unknown error"
+      details: err?.message || "Unknown error"
     });
   }
 });

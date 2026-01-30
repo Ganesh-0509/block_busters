@@ -4,6 +4,29 @@
   <title>ZK Verifiable ML</title>
 </head>
 <body>
-  <h1>ZK Verifiable ML Demo</h1>
+  <h1>California House Price Prediction</h1>
+
+  <form id="predict-form">
+    <label>MedInc: <input type="number" step="0.01" name="MedInc" required></label><br>
+    <label>HouseAge: <input type="number" step="0.1" name="HouseAge" required></label><br>
+    <label>AveRooms: <input type="number" step="0.01" name="AveRooms" required></label><br>
+    <label>AveBedrms: <input type="number" step="0.01" name="AveBedrms" required></label><br>
+    <label>Population: <input type="number" name="Population" required></label><br>
+    <label>AveOccup: <input type="number" step="0.01" name="AveOccup" required></label><br>
+    <label>Latitude: <input type="number" step="0.0001" name="Latitude" required></label><br>
+    <label>Longitude: <input type="number" step="0.0001" name="Longitude" required></label><br>
+    <button type="submit">Get Prediction</button>
+  </form>
+
+  <div id="prediction-result" style="margin-top:20px; display:none;">
+    <h2>Prediction:</h2>
+    <input type="number" id="predicted-value" readonly>
+    <h3>Your Input:</h3>
+    <ul id="input-summary"></ul>
+    <button id="verify-btn">Verify</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
+
 </html>
